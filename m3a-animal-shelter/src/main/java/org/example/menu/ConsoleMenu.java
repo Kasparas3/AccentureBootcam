@@ -46,9 +46,24 @@ public class ConsoleMenu {
 
         System.out.print("Name: ");
         String name = scanner.nextLine().trim();
+        if (name.isEmpty()) {
+            System.out.println("Name cannot be empty.");
+            return;
+        }
 
         System.out.print("Age: ");
-        int age = Integer.parseInt(scanner.nextLine().trim());
+        String ageText = scanner.nextLine().trim();
+        int age;
+        try {
+            age = Integer.parseInt(ageText);
+        } catch (NumberFormatException e) {
+            System.out.println("Age must be a whole number.");
+            return;
+        }
+        if (age < 0) {
+            System.out.println("Age cannot be negative.");
+            return;
+        }
 
         Animal animal;
         switch (species.toLowerCase()) {
