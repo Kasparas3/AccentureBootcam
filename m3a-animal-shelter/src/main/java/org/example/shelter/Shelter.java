@@ -4,6 +4,7 @@ import org.example.model.Animal;
 import org.example.model.AdoptionStatus;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Shelter <T extends Animal>{
@@ -35,6 +36,18 @@ public class Shelter <T extends Animal>{
             }
         }
         return result;
+    }
+
+    public List<T> getAnimalsSortedByName(){
+        List<T> sorted = new ArrayList<>(animals);
+        sorted.sort(Comparator.comparing(Animal::getName, String.CASE_INSENSITIVE_ORDER));
+        return sorted;
+    }
+
+    public List<T> getAnimalsSortedByAge(){
+        List<T> sorted = new ArrayList<>(animals);
+        sorted.sort(Comparator.comparingInt(Animal::getAge));
+        return sorted;
     }
 
     public void markAsAdopted(String id){

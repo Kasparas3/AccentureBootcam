@@ -30,6 +30,7 @@ public class ConsoleMenu {
                 case "3" -> findBySpecies();
                 case "4" -> listAnimals(shelter.findAvailableAnimals());
                 case "5" -> markAsAdopted();
+                case "6" -> sortAnimals();
                 case "0" -> {
                     System.out.println("Goodbye!");
                     running = false;
@@ -101,6 +102,16 @@ public class ConsoleMenu {
         shelter.markAsAdopted(id);
     }
 
+    private void sortAnimals(){
+        System.out.print("Sort by (name/age): ");
+        String choice = scanner.nextLine().trim();
+        switch (choice.toLowerCase()) {
+            case "name" -> listAnimals(shelter.getAnimalsSortedByName());
+            case "age" -> listAnimals(shelter.getAnimalsSortedByAge());
+            default -> System.out.println("Please type 'name' or 'age'.");
+        }
+    }
+
     private void printMenu(){
         System.out.println("""
                 1. Add animal
@@ -108,6 +119,7 @@ public class ConsoleMenu {
                 3. Find animals by species
                 4. List available animals
                 5. Mark animal as adopted
+                6. Sort animals by name or age
                 0. Exit
                 """);
     }
